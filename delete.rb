@@ -6,5 +6,7 @@ if(ARGV.size < 2)
 end
 
 db = SQLite3::Database.new("dict.db")
+count = db.execute("SELECT key, value FROM dict WHERE key = '#{ARGV[0]}' AND value = '#{ARGV[1]}'").size
 db.execute("DELETE FROM dict WHERE key = '#{ARGV[0]}' AND value = '#{ARGV[1]}'")
+puts "Deleted #{count} rows"
 
